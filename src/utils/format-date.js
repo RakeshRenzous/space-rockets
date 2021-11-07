@@ -7,7 +7,7 @@ export function formatDate(timestamp) {
   }).format(new Date(timestamp));
 }
 
-export function formatDateTime(timestamp) {
+export function formatDateTime(timestamp, timezone) {
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
@@ -15,6 +15,7 @@ export function formatDateTime(timestamp) {
     hour: "numeric",
     minute: "numeric",
     second: "numeric",
-    timeZoneName: "short",
+    timeZoneName: "longOffset",
+    timeZone: timezone ? timezone : Intl.DateTimeFormat().resolvedOptions().timeZone
   }).format(new Date(timestamp));
 }

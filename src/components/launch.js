@@ -19,12 +19,14 @@ import {
   Stack,
   AspectRatio,
   StatGroup,
+  Tooltip
 } from "@chakra-ui/react";
 
 import { useSpaceX } from "../utils/use-space-x";
 import { formatDateTime } from "../utils/format-date";
 import Error from "./error";
 import Breadcrumbs from "./breadcrumbs";
+import Timezones from "constants/timezones";
 
 export default function Launch() {
   let { launchId } = useParams();
@@ -114,6 +116,8 @@ function Header({ launch }) {
 }
 
 function TimeAndLocation({ launch }) {
+  const timezoneOffset = Timezones[launch.launch_date_local.substring(19)];
+
   return (
     <SimpleGrid columns={[1, 1, 2]} borderWidth="1px" p="4" borderRadius="md">
       <Stat>
@@ -123,9 +127,14 @@ function TimeAndLocation({ launch }) {
             Launch Date
           </Box>
         </StatLabel>
-        <StatNumber fontSize={["md", "xl"]}>
-          {formatDateTime(launch.launch_date_local)}
-        </StatNumber>
+        <Tooltip 
+          label={formatDateTime(launch.launch_date_local)}
+          hasArrow
+          placement="top">
+          <StatNumber fontSize={["md", "xl"]}>
+            {formatDateTime(launch.launch_date_local, timezoneOffset)}
+          </StatNumber>
+        </Tooltip>
         <StatHelpText>{timeAgo(launch.launch_date_utc)}</StatHelpText>
       </Stat>
       <Stat>
