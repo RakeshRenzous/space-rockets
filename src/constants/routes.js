@@ -1,9 +1,11 @@
 import React from 'react';
 
 import Home from "components/home";
+
 import LaunchPads from "components/launch-pads";
 import LaunchPad from "components/launch-pad";
-import Launches from 'components/launches';
+
+import Launches from 'containers/LaunchesListPage';
 import Launch from 'components/launch';
 
 export default [
