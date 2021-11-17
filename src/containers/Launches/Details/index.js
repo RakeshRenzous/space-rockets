@@ -22,11 +22,12 @@ import {
   Tooltip
 } from "@chakra-ui/react";
 
-import { useSpaceX } from "../utils/use-space-x";
-import { formatDateTime } from "../utils/format-date";
-import Error from "./error";
-import Breadcrumbs from "./breadcrumbs";
+import { useSpaceX } from "utils/use-space-x";
+import { formatDateTime } from "utils/format-date";
+import Error from "components/error";
+import Breadcrumbs from "components/breadcrumbs";
 import Timezones from "constants/timezones";
+import AddToFavourites from "components/AddToFavourites";
 
 export default function Launch() {
   let { launchId } = useParams();
@@ -46,7 +47,7 @@ export default function Launch() {
       <Breadcrumbs
         items={[
           { label: "Home", to: "/" },
-          { label: "Launches", to: ".." },
+          { label: "Launches", to: "/launches" },
           { label: `#${launch.flight_number}` },
         ]}
       />
@@ -65,6 +66,12 @@ export default function Launch() {
 }
 
 function Header({ launch }) {
+  const payload = {
+    data: launch,
+    type: 'launches',
+    id: 'flight_number'
+  };
+
   return (
     <Flex
       bgImage={`url(${launch.links.flickr_images[0]})`}
@@ -86,27 +93,33 @@ function Header({ launch }) {
         objectFit="contain"
         objectPosition="bottom"
       />
-      <Heading
-        color="white"
-        display="inline"
-        backgroundColor="#718096b8"
-        fontSize={["lg", "5xl"]}
-        px="4"
-        py="2"
-        borderRadius="lg"
-      >
-        {launch.mission_name}
-      </Heading>
+      <Box>
+        <Heading
+          color="white"
+          display="inline"
+          backgroundColor="#718096b8"
+          fontSize={["lg", "5xl"]}
+          px="4"
+          py="2"
+          borderRadius="lg"
+          marginRight='2'
+        >
+          {launch.mission_name}
+        </Heading>
+
+        <AddToFavourites payload={payload} categoryName='launches'/>
+      </Box>
+
       <Stack isInline spacing="3">
-        <Badge variantColor="purple" fontSize={["xs", "md"]}>
+        <Badge colorScheme="purple" fontSize={["xs", "md"]}>
           #{launch.flight_number}
         </Badge>
         {launch.launch_success ? (
-          <Badge variantColor="green" fontSize={["xs", "md"]}>
+          <Badge colorScheme="green" fontSize={["xs", "md"]}>
             Successful
           </Badge>
         ) : (
-          <Badge variantColor="red" fontSize={["xs", "md"]}>
+          <Badge colorScheme="red" fontSize={["xs", "md"]}>
             Failed
           </Badge>
         )}

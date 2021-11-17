@@ -1,10 +1,12 @@
 import React from 'react';
 
 import Home from "components/home";
-import LaunchPads from "components/launch-pads";
-import LaunchPad from "components/launch-pad";
-import Launches from 'components/launches';
-import Launch from 'components/launch';
+
+import LaunchPads from "containers/LaunchPads";
+import LaunchPad from "containers/LaunchPads/Details";
+
+import Launches from 'containers/Launches';
+import Launch from 'containers/Launches/Details';
 
 export default [
   {
