@@ -49,7 +49,7 @@ export default function LaunchPad() {
         items={[
           { label: "Home", to: "/" },
           { label: "Launch Pads", to: "/launch-pads" },
-          { label: launchPad.name }
+          { label: launchPad.name },
         ]}
       />
       <Header launchPad={launchPad} />
@@ -71,8 +71,8 @@ const randomColor = (start = 200, end = 250) =>
 function Header({ launchPad }) {
   const payload = {
     data: launchPad,
-    type: 'launchPads',
-    id: 'site_id'
+    type: "launchPads",
+    id: "site_id",
   };
 
   return (
@@ -98,10 +98,8 @@ function Header({ launchPad }) {
           borderRadius="lg"
         >
           {launchPad.site_name_long}
-
         </Heading>
-        <AddToFavourites payload={payload} categoryName='launchPads'/>
-
+        <AddToFavourites payload={payload} categoryName="launchPads" />
       </Box>
       <Stack isInline spacing="3">
         <Badge colorScheme="purple" fontSize={["sm", "md"]}>

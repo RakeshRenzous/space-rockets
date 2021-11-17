@@ -1,5 +1,5 @@
 export default function getUrl(content, category) {
-  if(content === undefined) {
+  if (content === undefined) {
     return;
   }
 
@@ -7,8 +7,8 @@ export default function getUrl(content, category) {
     case "launches":
       return `/launches/${content.flight_number.toString()}`;
     case "launchPads":
-      return `/launch-pads/${content.site_id}`  
+      return `/launch-pads/${content.site_id}`;
     default:
-      return ''
+      return "";
   }
 }

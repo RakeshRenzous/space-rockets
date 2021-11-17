@@ -19,7 +19,7 @@ import {
   Stack,
   AspectRatio,
   StatGroup,
-  Tooltip
+  Tooltip,
 } from "@chakra-ui/react";
 
 import { useSpaceX } from "utils/use-space-x";
@@ -68,8 +68,8 @@ export default function Launch() {
 function Header({ launch }) {
   const payload = {
     data: launch,
-    type: 'launches',
-    id: 'flight_number'
+    type: "launches",
+    id: "flight_number",
   };
 
   return (
@@ -102,12 +102,12 @@ function Header({ launch }) {
           px="4"
           py="2"
           borderRadius="lg"
-          marginRight='2'
+          marginRight="2"
         >
           {launch.mission_name}
         </Heading>
 
-        <AddToFavourites payload={payload} categoryName='launches'/>
+        <AddToFavourites payload={payload} categoryName="launches" />
       </Box>
 
       <Stack isInline spacing="3">
@@ -140,10 +140,11 @@ function TimeAndLocation({ launch }) {
             Launch Date
           </Box>
         </StatLabel>
-        <Tooltip 
+        <Tooltip
           label={formatDateTime(launch.launch_date_local)}
           hasArrow
-          placement="top">
+          placement="top"
+        >
           <StatNumber fontSize={["md", "xl"]}>
             {formatDateTime(launch.launch_date_local, timezoneOffset)}
           </StatNumber>

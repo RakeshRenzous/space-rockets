@@ -7,10 +7,10 @@ import Badges from "components/Badges";
 import { AppStateContext } from "store";
 import { STORE_KEYS } from "constants/uiConstants";
 
-export function LaunchPadCard({ content}) {
+export function LaunchPadCard({ content }) {
   const payload = {
     data: content,
-    type: 'launchPads'
+    type: "launchPads",
   };
 
   const isActive = content.status === "active";
@@ -19,7 +19,7 @@ export function LaunchPadCard({ content}) {
   return (
     <>
       <Box d="flex" alignItems="baseline">
-        <Badges isSuccess={isActive} label={badgeLabel}/>
+        <Badges isSuccess={isActive} label={badgeLabel} />
         <Box
           color="gray.500"
           fontWeight="semibold"
@@ -32,8 +32,8 @@ export function LaunchPadCard({ content}) {
           {content.successful_launches} succeeded
         </Box>
       </Box>
-      
-        <Flex justifyContent='space-between'>
+
+      <Flex justifyContent="space-between">
         <Box>
           <Box
             mt="1"
@@ -48,18 +48,17 @@ export function LaunchPadCard({ content}) {
             {content.vehicles_launched.join(", ")}
           </Text>
         </Box>
-        <AddToFavourites payload={payload} categoryName='launchPads'/>
+        <AddToFavourites payload={payload} categoryName="launchPads" />
       </Flex>
     </>
-  )
-
+  );
 }
 
 export default function LaunchPadItem({ launchPad }) {
   const AppState = useContext(AppStateContext);
   let isFavourited = false;
 
-  if(AppState.favourites?.launchPads) {
+  if (AppState.favourites?.launchPads) {
     let launchPadId = launchPad[STORE_KEYS.launchPads];
     isFavourited = launchPadId in AppState.favourites.launchPads;
   }
@@ -75,7 +74,7 @@ export default function LaunchPadItem({ launchPad }) {
       position="relative"
     >
       <Box p="6">
-        <LaunchPadCard content={launchPad}/>
+        <LaunchPadCard content={launchPad} />
       </Box>
     </Box>
   );

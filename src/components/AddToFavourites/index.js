@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { IconButton, Tooltip } from "@chakra-ui/react";
-import { Heart } from 'react-feather';
+import { Heart } from "react-feather";
 import { DispatchContext, AppStateContext } from "store";
 import { STORE_KEYS } from "constants/uiConstants";
-
 
 export default function AddToFavourites({ payload, categoryName }) {
   const AppDispatch = useContext(DispatchContext);
@@ -11,7 +10,7 @@ export default function AddToFavourites({ payload, categoryName }) {
 
   let isFavourited = false;
 
-  if(AppState.favourites[categoryName] !== undefined) {
+  if (AppState.favourites[categoryName] !== undefined) {
     let { data: payloadData } = payload;
 
     let contentId = payloadData[STORE_KEYS[categoryName]];
@@ -22,23 +21,26 @@ export default function AddToFavourites({ payload, categoryName }) {
     event.preventDefault();
     event.stopPropagation();
 
-    let actionType = isFavourited ? 'removeFavourite' : 'addFavourite';
+    let actionType = isFavourited ? "removeFavourite" : "addFavourite";
 
     return AppDispatch({
       type: actionType,
-      payload
+      payload,
     });
   }
 
-  const label = isFavourited ? 'Remove from favourites' : 'Add to favourites';
+  const label = isFavourited ? "Remove from favourites" : "Add to favourites";
 
   return (
-    <Tooltip
-    label={label}
-    placement="top">
+    <Tooltip label={label} placement="top">
       <IconButton
-        justifyContent="center" 
-        icon={<Heart fill={isFavourited ? '#ED64A6' : '#A0AEC0'} color={isFavourited ? '#ED64A6' : '#A0AEC0'}/>} 
+        justifyContent="center"
+        icon={
+          <Heart
+            fill={isFavourited ? "#ED64A6" : "#A0AEC0"}
+            color={isFavourited ? "#ED64A6" : "#A0AEC0"}
+          />
+        }
         onClick={addFavourite}
       />
     </Tooltip>

@@ -9,11 +9,11 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Button,
-  useDisclosure
-} from "@chakra-ui/react"
+  useDisclosure,
+} from "@chakra-ui/react";
 
 import FavouritesContainer from "./FavouritesContainer";
-  
+
 export default function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -41,20 +41,15 @@ export default function NavBar() {
         </Button>
       </Flex>
 
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onClose}
-        size="sm"
-      >
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="sm">
         <DrawerOverlay />
         <DrawerContent>
-        <DrawerCloseButton size='sm'/>
-        <DrawerHeader borderBottomWidth="1px">Favourites</DrawerHeader>
+          <DrawerCloseButton size="sm" />
+          <DrawerHeader borderBottomWidth="1px">Favourites</DrawerHeader>
 
-        <DrawerBody>
-          <FavouritesContainer favCb={onClose}/>
-        </DrawerBody>
+          <DrawerBody>
+            <FavouritesContainer favCb={onClose} />
+          </DrawerBody>
         </DrawerContent>
       </Drawer>
     </>

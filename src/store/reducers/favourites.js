@@ -7,8 +7,8 @@ const favouriteReducer = (state, action) => {
   let categoryKey = payload.type;
 
   switch (action.type) {
-    case 'addFavourite': {
-      if(!(categoryKey in favourites)) {
+    case "addFavourite": {
+      if (!(categoryKey in favourites)) {
         favourites[categoryKey] = {};
       }
 
@@ -18,15 +18,15 @@ const favouriteReducer = (state, action) => {
       let payloadId = payload.data[payloadKey];
 
       favouritesCategory[payloadId] = payload.data;
-      syncToLocal('appState', state);
+      syncToLocal("appState", state);
 
       return Object.assign({}, state, { favourites });
     }
 
-    case 'removeFavourite': {
+    case "removeFavourite": {
       let favouritesCategory = favourites[categoryKey];
 
-      if(favouritesCategory === undefined) {
+      if (favouritesCategory === undefined) {
         return Object.assign({}, state);
       }
 
@@ -34,18 +34,18 @@ const favouriteReducer = (state, action) => {
       let payloadId = payload.data[payloadKey];
 
       delete favouritesCategory[payloadId];
-  
-      if(Object.keys(favouritesCategory).length === 0) {
+
+      if (Object.keys(favouritesCategory).length === 0) {
         delete favourites[categoryKey];
       }
-      
-      syncToLocal('appState', state);
+
+      syncToLocal("appState", state);
       return Object.assign({}, state, { favourites });
     }
 
     default:
       break;
   }
-}
+};
 
 export default favouriteReducer;

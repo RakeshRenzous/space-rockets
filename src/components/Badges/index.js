@@ -3,8 +3,8 @@ import { Badge } from "@chakra-ui/react";
 
 const COLOR_SCHEME = {
   success: "green",
-  failure: "red"
-}
+  failure: "red",
+};
 
 export default function Badges({ isSuccess, label }) {
   let colorScheme = isSuccess ? COLOR_SCHEME.success : COLOR_SCHEME.failure;
