@@ -10,13 +10,13 @@ const MOUNT_NODE = document.getElementById("root");
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <ChakraProvider>
-        <Store>
-          <App />
-        </Store>
-      </ChakraProvider>
-    </Router>
+    <Store>
+      <Router>
+        <ChakraProvider>
+            <App />
+        </ChakraProvider>
+      </Router>
+    </Store>
   </React.StrictMode>,
   MOUNT_NODE
 );

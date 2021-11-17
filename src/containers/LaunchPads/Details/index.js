@@ -17,10 +17,11 @@ import {
   AspectRatio,
 } from "@chakra-ui/react";
 
-import { useSpaceX } from "../utils/use-space-x";
-import Error from "./error";
-import Breadcrumbs from "./breadcrumbs";
-import LaunchItem from "containers/LaunchesListPage/LaunchItem";
+import { useSpaceX } from "utils/use-space-x";
+import Error from "components/error";
+import Breadcrumbs from "components/breadcrumbs";
+import LaunchItem from "containers/Launches/LaunchItem";
+import AddToFavourites from "components/AddToFavourites";
 
 export default function LaunchPad() {
   let { launchPadId } = useParams();
@@ -47,8 +48,8 @@ export default function LaunchPad() {
       <Breadcrumbs
         items={[
           { label: "Home", to: "/" },
-          { label: "Launch Pads", to: ".." },
-          { label: launchPad.name },
+          { label: "Launch Pads", to: "/launch-pads" },
+          { label: launchPad.name }
         ]}
       />
       <Header launchPad={launchPad} />
@@ -68,6 +69,12 @@ const randomColor = (start = 200, end = 250) =>
   `hsl(${start + end * Math.random()}, 80%, 90%)`;
 
 function Header({ launchPad }) {
+  const payload = {
+    data: launchPad,
+    type: 'launchPads',
+    id: 'site_id'
+  };
+
   return (
     <Flex
       background={`linear-gradient(${randomColor()}, ${randomColor()})`}
@@ -81,27 +88,32 @@ function Header({ launchPad }) {
       alignItems="flex-end"
       justifyContent="space-between"
     >
-      <Heading
-        color="gray.900"
-        display="inline"
-        mx={[2, 4]}
-        my="2"
-        fontSize={["md", "3xl"]}
-        borderRadius="lg"
-      >
-        {launchPad.site_name_long}
-      </Heading>
+      <Box>
+        <Heading
+          color="gray.900"
+          display="inline"
+          mx={[2, 4]}
+          my="2"
+          fontSize={["md", "3xl"]}
+          borderRadius="lg"
+        >
+          {launchPad.site_name_long}
+
+        </Heading>
+        <AddToFavourites payload={payload} categoryName='launchPads'/>
+
+      </Box>
       <Stack isInline spacing="3">
-        <Badge variantColor="purple" fontSize={["sm", "md"]}>
+        <Badge colorScheme="purple" fontSize={["sm", "md"]}>
           {launchPad.successful_launches}/{launchPad.attempted_launches}{" "}
           successful
         </Badge>
         {launchPad.stats === "active" ? (
-          <Badge variantColor="green" fontSize={["sm", "md"]}>
+          <Badge colorScheme="green" fontSize={["sm", "md"]}>
             Active
           </Badge>
         ) : (
-          <Badge variantColor="red" fontSize={["sm", "md"]}>
+          <Badge variantcolorSchemeColor="red" fontSize={["sm", "md"]}>
             Retired
           </Badge>
         )}

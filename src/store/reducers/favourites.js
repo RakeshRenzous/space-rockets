@@ -1,33 +1,46 @@
+import { syncToLocal } from "utils/sync-localstorage";
+import { STORE_KEYS } from "constants/uiConstants";
 
 const favouriteReducer = (state, action) => {
+  let { favourites } = state;
+  let { payload } = action;
+  let categoryKey = payload.type;
+
   switch (action.type) {
     case 'addFavourite': {
-      let { payload } = action;
-      let categoryKey = payload.type;
-
-      if(!(categoryKey in state)) {
-        state[categoryKey] = {};
+      if(!(categoryKey in favourites)) {
+        favourites[categoryKey] = {};
       }
 
-      let favouritesCategory = state[categoryKey];
-      let payloadId = payload.data[payload.id];
+      let favouritesCategory = favourites[categoryKey];
+      let payloadKey = STORE_KEYS[categoryKey];
+
+      let payloadId = payload.data[payloadKey];
 
       favouritesCategory[payloadId] = payload.data;
-      return state;
+      syncToLocal('appState', state);
+
+      return Object.assign({}, state, { favourites });
     }
 
     case 'removeFavourite': {
-      let { payload } = action;
-      let categoryKey = payload.type;
-      let favouritesCategory = state[categoryKey];
-  
-      delete favouritesCategory[payload.data];
+      let favouritesCategory = favourites[categoryKey];
+
+      if(favouritesCategory === undefined) {
+        return Object.assign({}, state);
+      }
+
+      let payloadKey = STORE_KEYS[categoryKey];
+      let payloadId = payload.data[payloadKey];
+
+      delete favouritesCategory[payloadId];
   
       if(Object.keys(favouritesCategory).length === 0) {
-        delete state[categoryKey];
+        delete favourites[categoryKey];
       }
-  
-      return state;
+      
+      syncToLocal('appState', state);
+      return Object.assign({}, state, { favourites });
     }
 
     default:

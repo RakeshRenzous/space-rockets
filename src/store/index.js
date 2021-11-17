@@ -1,20 +1,25 @@
 import React, { useReducer } from 'react';
 
 import FavouritesReducer from './reducers/favourites';
+import { fetchFromLocal } from 'utils/sync-localstorage';
 
-const AppInitalState = {
-  favourites: new Map()
+const INITAL_STATE = {
+  favourites: {}
 }
 
-const AppStateContext = React.createContext();
-const DispatchContext = React.createContext();
+const AppState = fetchFromLocal('appState', INITAL_STATE);
+
+export const AppStateContext = React.createContext();
+export const DispatchContext = React.createContext();
 
 export default function Store({ children }) {
-  const [AppState, dispatch] = useReducer(FavouritesReducer, AppInitalState);
+  const [state, dispatch] = useReducer(FavouritesReducer, AppState);
 
   return (
-    <DispatchContext.Provider value={dispatch}>
-      <AppStateContext.Provider value={AppState}> {children} </AppStateContext.Provider>
-    </DispatchContext.Provider>
+    <AppStateContext.Provider value={state}> 
+      <DispatchContext.Provider value={dispatch}>
+        {children} 
+      </DispatchContext.Provider>
+    </AppStateContext.Provider>
   )
 }

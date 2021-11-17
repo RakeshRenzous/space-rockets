@@ -1,36 +1,34 @@
 import React from "react";
 import { SimpleGrid } from "@chakra-ui/react";
 
-import { useSpaceXPaginated } from "utils/use-space-x";
 import Error from "components/error";
 import Breadcrumbs from "components/breadcrumbs";
 import LoadMoreButton from "components/load-more-button";
-import LaunchItem from "./LaunchItem";
+import { useSpaceXPaginated } from "utils/use-space-x";
+import LaunchPadItem from "./LaunchPadItem";
 
 const PAGE_SIZE = 12;
 
-export default function Launches() {
-  const { data, error, isValidating, setSize, size } = useSpaceXPaginated(
-    "/launches/past",
+export default function LaunchPads() {
+  const { data, error, isValidating, size, setSize } = useSpaceXPaginated(
+    "/launchpads",
     {
       limit: PAGE_SIZE,
-      order: "desc",
-      sort: "launch_date_utc",
     }
   );
-  console.log(data, error);
+
   return (
     <div>
       <Breadcrumbs
-        items={[{ label: "Home", to: "/" }, { label: "Launches" }]}
+        items={[{ label: "Home", to: "/" }, { label: "Launch Pads" }]}
       />
       <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
         {error && <Error />}
         {data &&
           data
             .flat()
-            .map((launch) => (
-              <LaunchItem launch={launch} key={launch.flight_number} />
+            .map((launchPad) => (
+              <LaunchPadItem key={launchPad.site_id} launchPad={launchPad} />
             ))}
       </SimpleGrid>
       <LoadMoreButton
@@ -42,3 +40,4 @@ export default function Launches() {
     </div>
   );
 }
+
