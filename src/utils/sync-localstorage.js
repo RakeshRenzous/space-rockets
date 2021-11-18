@@ -1,5 +1,5 @@
 export function syncToLocal(key, payload) {
-  if(!payload) {
+  if (!payload) {
     return;
   }
 

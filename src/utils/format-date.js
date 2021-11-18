@@ -16,6 +16,8 @@ export function formatDateTime(timestamp, timezone) {
     minute: "numeric",
     second: "numeric",
     timeZoneName: "longOffset",
-    timeZone: timezone ? timezone : Intl.DateTimeFormat().resolvedOptions().timeZone
+    timeZone: timezone
+      ? timezone
+      : Intl.DateTimeFormat().resolvedOptions().timeZone,
   }).format(new Date(timestamp));
 }

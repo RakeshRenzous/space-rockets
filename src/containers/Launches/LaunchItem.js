@@ -12,16 +12,16 @@ import Badges from "components/Badges";
 export function LaunchCard({ content }) {
   const payload = {
     data: content,
-    type: 'launches'
+    type: "launches",
   };
 
-  const badgeLabel = content.launch_success  ? "Successful" : "Failed";
+  const badgeLabel = content.launch_success ? "Successful" : "Failed";
 
   return (
     <>
       <Box>
         <Box d="flex" alignItems="baseline">
-          <Badges isSuccess={content.launch_success} label={badgeLabel}/>
+          <Badges isSuccess={content.launch_success} label={badgeLabel} />
           <Box
             color="gray.500"
             fontWeight="semibold"
@@ -34,7 +34,7 @@ export function LaunchCard({ content }) {
           </Box>
         </Box>
 
-        <Flex justifyContent='space-between'>
+        <Flex justifyContent="space-between">
           <Box>
             <Box
               mt="1"
@@ -52,20 +52,19 @@ export function LaunchCard({ content }) {
               </Text>
             </Flex>
           </Box>
-          
-          <AddToFavourites payload={payload} categoryName='launches'/>
+
+          <AddToFavourites payload={payload} categoryName="launches" />
         </Flex>
       </Box>
-
     </>
-  )
+  );
 }
 
 export default function LaunchItem({ launch }) {
   const AppState = useContext(AppStateContext);
   let isFavourited = false;
 
-  if(AppState.favourites?.launches) {
+  if (AppState.favourites?.launches) {
     let launchId = launch[STORE_KEYS.launches];
     isFavourited = launchId in AppState.favourites.launches;
   }
@@ -103,9 +102,8 @@ export default function LaunchItem({ launch }) {
       />
 
       <Box p="6">
-        <LaunchCard content={launch} isFavourited={isFavourited}/>
+        <LaunchCard content={launch} isFavourited={isFavourited} />
       </Box>
     </Box>
   );
 }
-

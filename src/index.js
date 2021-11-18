@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider } from "@chakra-ui/react";
 
 import App from "containers/AppPage";
 import Store from "store";
@@ -13,7 +13,7 @@ ReactDOM.render(
     <Store>
       <Router>
         <ChakraProvider>
-            <App />
+          <App />
         </ChakraProvider>
       </Router>
     </Store>
