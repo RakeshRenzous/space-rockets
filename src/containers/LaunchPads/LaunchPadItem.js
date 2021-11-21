@@ -54,7 +54,7 @@ export function LaunchPadCard({ content }) {
   );
 }
 
-export default function LaunchPadItem({ launchPad }) {
+export default function LaunchPadItem({ launchPad, style }) {
   const AppState = useContext(AppStateContext);
   let isFavourited = false;
 
@@ -66,6 +66,7 @@ export default function LaunchPadItem({ launchPad }) {
   return (
     <Box
       as={Link}
+      css={style}
       to={`/launch-pads/${launchPad.site_id}`}
       boxShadow="md"
       borderWidth="1px"
