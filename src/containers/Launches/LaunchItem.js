@@ -70,9 +70,10 @@ export default function LaunchItem({ launch }) {
   }
 
   return (
-    <Box
+    <Flex
       as={Link}
       to={`/launches/${launch.flight_number.toString()}`}
+      flexDir="column"
       boxShadow="md"
       borderWidth="1px"
       rounded="lg"
@@ -104,6 +105,6 @@ export default function LaunchItem({ launch }) {
       <Box p="6">
         <LaunchCard content={launch} isFavourited={isFavourited} />
       </Box>
-    </Box>
+    </Flex>
   );
 }
