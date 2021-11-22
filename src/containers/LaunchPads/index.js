@@ -17,22 +17,20 @@ export default function LaunchPads() {
     }
   );
 
-  const flattenData = data?.flat();
-
   return (
     <div>
       <Breadcrumbs
         items={[{ label: "Home", to: "/" }, { label: "Launch Pads" }]}
       />
-
       <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
         {error && <Error />}
         {data &&
-          flattenData.map((launchPad) => (
-            <LaunchPadItem key={launchPad.site_id} launchPad={launchPad} />
-          ))}
+          data
+            .flat()
+            .map((launchPad) => (
+              <LaunchPadItem key={launchPad.site_id} launchPad={launchPad} />
+            ))}
       </SimpleGrid>
-
       <LoadMoreButton
         loadMore={() => setSize(size + 1)}
         data={data}
