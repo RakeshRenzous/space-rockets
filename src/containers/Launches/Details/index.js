@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
 import { format as timeAgo } from "timeago.js";
 import { Watch, MapPin, Navigation, Layers } from "react-feather";
@@ -28,9 +28,12 @@ import Error from "components/error";
 import Breadcrumbs from "components/breadcrumbs";
 import Timezones from "constants/timezones";
 import AddToFavourites from "components/AddToFavourites";
+import { AppStateContext } from "store";
 
 export default function Launch() {
   let { launchId } = useParams();
+  const AppState = useContext(AppStateContext);
+
   const { data: launch, error } = useSpaceX(`/launches/${launchId}`);
 
   if (error) return <Error />;
@@ -42,12 +45,18 @@ export default function Launch() {
     );
   }
 
+  let sortKey = "";
+
+  if (AppState?.sort?.launches !== undefined) {
+    sortKey = `sort=${AppState?.sort?.launches}`;
+  }
+
   return (
     <div>
       <Breadcrumbs
         items={[
           { label: "Home", to: "/" },
-          { label: "Launches", to: "/launches" },
+          { label: "Launches", to: `/launches?${sortKey}` },
           { label: `#${launch.flight_number}` },
         ]}
       />
