@@ -4,7 +4,7 @@
 
 ### [👉 Go to the challenge 👈](./CHALLENGE.md)
 
-### [🚀 See the app in action 🚀](https://spacerockets.netlify.app)
+### [Finished app](https://frosty-fermat-5dcd03.netlify.app/)
 
 ## Develop
 
