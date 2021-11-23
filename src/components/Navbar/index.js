@@ -11,6 +11,7 @@ import {
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 import FavouritesContainer from "./FavouritesContainer";
 
@@ -24,18 +25,25 @@ export default function NavBar() {
         align="center"
         justify="space-between"
         wrap="wrap"
-        padding="6"
+        paddingX="6"
+        paddingY="4"
         bg="gray.800"
         color="white"
+        position="fixed"
+        width="100%"
+        zIndex="100"
+        top="0"
       >
-        <Text
-          fontFamily="mono"
-          letterSpacing="2px"
-          fontWeight="bold"
-          fontSize="lg"
-        >
-          ¡SPACE·R0CKETS!
-        </Text>
+        <Link to={"/"}>
+          <Text
+            fontFamily="mono"
+            letterSpacing="2px"
+            fontWeight="bold"
+            fontSize="lg"
+          >
+            ¡SPACE·R0CKETS!
+          </Text>
+        </Link>
         <Button colorScheme="teal" onClick={onOpen}>
           Favourites
         </Button>
