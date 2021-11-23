@@ -1,12 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Box, Image, Text, Flex } from "@chakra-ui/react";
 import { format as timeAgo } from "timeago.js";
 import { Link } from "react-router-dom";
 
 import { formatDate } from "utils/format-date";
 import AddToFavourites from "components/AddToFavourites";
-import { AppStateContext } from "store";
-import { STORE_KEYS } from "constants/uiConstants";
 import Badges from "components/Badges";
 
 export function LaunchCard({ content }) {
@@ -61,14 +59,6 @@ export function LaunchCard({ content }) {
 }
 
 export default function LaunchItem({ launch }) {
-  const AppState = useContext(AppStateContext);
-  let isFavourited = false;
-
-  if (AppState.favourites?.launches) {
-    let launchId = launch[STORE_KEYS.launches];
-    isFavourited = launchId in AppState.favourites.launches;
-  }
-
   return (
     <Flex
       as={Link}
@@ -103,7 +93,7 @@ export default function LaunchItem({ launch }) {
       />
 
       <Box p="6">
-        <LaunchCard content={launch} isFavourited={isFavourited} />
+        <LaunchCard content={launch} />
       </Box>
     </Flex>
   );

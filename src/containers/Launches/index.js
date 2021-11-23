@@ -61,7 +61,15 @@ export default function Launches() {
 
   return (
     <>
-      <Flex justifyContent="space-between" alignItems="center">
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        position="sticky"
+        top="0"
+        zIndex="50"
+        bgColor="white"
+        boxShadow="0 4px 10px rgb(0 0 0 / 12%)"
+      >
         <Breadcrumbs
           items={[{ label: "Home", to: "/" }, { label: "Launches" }]}
         />

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useContext } from "react/cjs/react.development";
+import React, { useState, useContext } from "react";
 import { AppStateContext } from "store";
 import { Button, Box } from "@chakra-ui/react";
 import FavouritesCard from "./FavouritesCard";

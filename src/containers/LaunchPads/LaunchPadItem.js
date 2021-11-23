@@ -1,11 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import AddToFavourites from "components/AddToFavourites";
 import Badges from "components/Badges";
-
-import { AppStateContext } from "store";
-import { STORE_KEYS } from "constants/uiConstants";
 
 export function LaunchPadCard({ content }) {
   const payload = {
@@ -55,14 +52,6 @@ export function LaunchPadCard({ content }) {
 }
 
 export default function LaunchPadItem({ launchPad }) {
-  const AppState = useContext(AppStateContext);
-  let isFavourited = false;
-
-  if (AppState.favourites?.launchPads) {
-    let launchPadId = launchPad[STORE_KEYS.launchPads];
-    isFavourited = launchPadId in AppState.favourites.launchPads;
-  }
-
   return (
     <Box
       as={Link}
